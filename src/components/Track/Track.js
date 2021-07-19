@@ -1,60 +1,55 @@
-
 import React from 'react'
-import './Track.css'
+import bgImg from '../../assets/justin.PNG'
 
-class Track extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            track: this.props.track
-        }
-
-        this.addTrack = this.addTrack.bind(this)
-        this.removeTrack = this.removeTrack.bind(this)        
+const Track = ({ track, onAdd, onRemove, isRemoval }) => {
+    const addTrack = () => {
+        onAdd(track)
     }
-
-    addTrack(){
-        this.props.onAdd(this.props.track)
+    const removeTrack = () => {
+        onRemove(track)
     }
-
-    removeTrack(){
-        this.props.onRemove(this.state.track)
-    }
-
-    renderAction(){
-        if (this.props.isRemoval) {
-            return (
-                <button className="Track-action" onClick={this.removeTrack}> - </button>
-            )
-        }
-        return (
-            <button className="Track-action" onClick={this.addTrack}> + </button>
-        )
-    }
-
-    render(){
-        return(
-            <div className="Track">
-                <div className="Track-information">
-                    <h3>{this.props.track.name}</h3>
-                    <p>
-                        {this.props.track.artist} | {this.props.track.album}
-                    </p>
-                    <iframe 
-                        src={"https://open.spotify.com/embed/track/" + this.props.track.id}
-                        width="300" 
-                        height="80"
-                        frameBorder="0"
-                        allowtransparency="True"
-                        allow="encrypted-media"
-                        title="preview"
-                    />
+    return (
+        <ul className="track">
+            <li>
+                <div style={{ margin: '0px', width: '100%', backgroundImage: `url(${bgImg})`, backgroundPosition: 'center', borderRadius: '0.3rem' }}>
+                    <div className="item" style={{backgroundColor: 'rgba(255, 255, 255, 0.8)', margin: '0px'}}>                        
+                        <div>
+                            <h3>{track.name}</h3>
+                            {track.artist} | {track.album}
+                        </div>
+                        <TrackAction isRemoval={isRemoval} removeTrack={removeTrack} addTrack={addTrack} />
+                    </div>
                 </div>
-                {this.renderAction()}
-            </div>
-        )
-    }
+            </li>
+            <li>
+                <iframe 
+                    src={"https://open.spotify.com/embed/track/" + track.id}
+                    width="100%" 
+                    height="80"
+                    frameBorder="0"
+                    allowtransparency="True"
+                    allow="encrypted-media"
+                    title="preview"
+                />
+            </li>
+        </ul>
+    )
 }
+const TrackAction = ({ isRemoval, removeTrack, addTrack }) => {
+    return (
+        <>
+            {
+                isRemoval ?
+                    <button className="btn" style={{background: 'red'}} onClick={removeTrack}> - </button>
+                :
+                    <button className="btn" onClick={addTrack}> + </button>
+            }
+        </>
+    )
+}
+
+
+
 
 
 export default Track

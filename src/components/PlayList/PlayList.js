@@ -1,32 +1,37 @@
-import React from 'react'
+import React from "react";
+import TrackList from "../TrackList/TrackList";
 
-import './PlayList.css'
-import TrackList from '../TrackList/TrackList'
+const PlayList = ({
+  onNameChange,
+  playListTracks,
+  playListName,
+  onRemove,
+  onSave,
+}) => {
+  return (
+    <>
+      <div className="trackList">
+        <form className="form" onSubmit={onSave}>
+          <input
+            id="playListName"
+            type="text"
+            onChange={(e) => onNameChange(e.target.value)}
+            placeholder="Playlist Name"
+          />
+          {(playListTracks.length > 0) &&        
+            <button className="btn" onClick={onSave}>
+              Save to Spotify
+            </button>
+          }
+        </form>
+        <TrackList
+          tracks={playListTracks}
+          isRemoval={true}
+          onRemove={onRemove}
+        />
+      </div>
+    </>
+  );
+};
 
-class PlayList extends React.Component{
-    constructor(props){
-        super(props)
-
-        this.handleNameChange = this.handleNameChange.bind(this)
-    }
-
-    handleNameChange(event){
-        this.props.onNameChange(event.target.value)
-    }
- 
-    render(){
-        return(
-            <div className="PlayList">
-                <input onChange={this.handleNameChange} defaultValue={'New Playlist'} />
-                <TrackList 
-                    tracks={this.props.PlayListTracks}
-                    isRemoval={true}
-                    onRemove={this.props.onRemove}
-                />
-                <button className="PlayList-save" onClick={this.props.onSave}>Save to Spotify</button>
-            </div>
-        )
-    }
-}
-
-export default PlayList
+export default PlayList;

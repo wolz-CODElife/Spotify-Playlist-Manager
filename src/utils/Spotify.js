@@ -2,10 +2,10 @@ const clientId = "0917ebef49324a5a9dc234ddce014ca8"
 const redirectUri = encodeURIComponent("http://localhost:3000/")
 const scopes = encodeURIComponent("user-read-private user-read-email playlist-modify-public")
 
-let accessToken
+export let accessToken
 
 const Spotify = {
-    getAccessToken(){
+    getAccessToken : () => {
         if(accessToken){
             return accessToken
         }
@@ -23,15 +23,11 @@ const Spotify = {
             window.location = accessUrl
         }
     },
-    search(term){
+    search : (term) => {
         const accessToken = Spotify.getAccessToken()
-        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`,{
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        }).then(response => {
-            return response.json()
-        })
+        const headers = {Authorization: `Bearer ${accessToken}`}
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {headers: headers})
+        .then(response => { return response.json() })
         .then(jsonResponse => {
             if (!jsonResponse.tracks) {
                 return []
@@ -45,7 +41,7 @@ const Spotify = {
             }))
         })
     },
-    savePlaylist(name, trackUris){
+    savePlaylist: (name, trackUris) => {
         if(!name || !trackUris.length){
             return 
         }

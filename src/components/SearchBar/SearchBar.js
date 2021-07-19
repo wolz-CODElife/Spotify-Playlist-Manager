@@ -1,44 +1,27 @@
+import React, { useState } from "react";
 
-import React from 'react'
-import './SearchBar.css'
+const SearchBar = ({ onSearch }) => {
+  const [term, setTerm] = useState("");
 
-class SearchBar extends React.Component{
-    constructor(props){
-        super(props)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(term);
+  };
+  return (
+    <>
+      <form className="form" onSubmit={handleSubmit}>
+        <input
+          id="searchBar"
+          type="text"
+          placeholder="Enter song, album or artist name"
+          onChange={(e) => setTerm(e.target.value)}
+        />
+        <button className="btn" onClick={handleSubmit}>
+          SEARCH
+        </button>
+      </form>
+    </>
+  );
+};
 
-        this.state = {
-            terms: ""
-        }
-
-        this.handleTermChange = this.handleTermChange.bind(this)
-        this.search = this.search.bind(this)
-        this.handleEnter = this.handleEnter.bind(this)
-        
-    }
-
-    handleTermChange(event){
-        this.setState({term: event.target.value})
-    }
-
-    search(){
-        this.props.onSearch(this.state.term)
-    }
-
-    handleEnter(event){
-        if (event.keyCode === 13) {
-            this.search()
-        }
-    }
-
-    render(){
-        return(
-            <div className="SearchBar">
-                <input type="text" placeholder="Enter song, album or artist" onChange={this.handleTermChange} onKeyUp={this.handleEnter} />
-                <button className="SearchButton" onClick={this.search}>SEARCH</button>
-            </div>
-        )
-    }
-}
-
-
-export default SearchBar
+export default SearchBar;
