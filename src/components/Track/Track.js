@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import bgImg from '../../assets/justin.PNG'
 
 const Track = ({ track, onAdd, onRemove, isRemoval }) => {
+    const [trackBg, setTrackBg] = useState(bgImg)
+
+    useEffect(() => {
+        if (track.img) {
+            setTrackBg(track.img)
+        }
+    }, [track.img])
     const addTrack = () => {
         onAdd(track)
     }
@@ -11,7 +18,7 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
     return (
         <ul className="track">
             <li>
-                <div style={{ margin: '0px', width: '100%', backgroundImage: `url(${bgImg})`, backgroundPosition: 'center', borderRadius: '0.3rem' }}>
+                <div style={{ margin: '0px', width: '100%', backgroundImage: `url(${trackBg})`, backgroundPosition: 'center', borderRadius: '0.3rem' }}>
                     <div className="item" style={{backgroundColor: 'rgba(255, 255, 255, 0.8)', margin: '0px'}}>                        
                         <div>
                             <h3>{track.name}</h3>

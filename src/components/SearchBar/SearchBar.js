@@ -13,7 +13,7 @@ const SearchBar = ({ onSearch }) => {
         <input
           id="searchBar"
           type="text"
-          placeholder="Enter song, album or artist name"
+          placeholder="Song, album or artist name"
           onChange={(e) => setTerm(e.target.value)}
         />
         <button className="btn" onClick={handleSubmit}>
