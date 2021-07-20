@@ -239,9 +239,12 @@ p {
   height: 40px;
   background-color: var(--clr-white);
   border-radius: 50%;
+  border: 2px solid var(--clr-wh);
+  cursor: pointer;
 }
 .dropDown ul{
   background-color: var(--clr-white);
+  min-width: 250px;
   padding: 1rem;
   position: absolute;
 }
