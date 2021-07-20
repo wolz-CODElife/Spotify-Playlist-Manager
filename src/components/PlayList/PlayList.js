@@ -16,6 +16,7 @@ const PlayList = ({
             id="playListName"
             type="text"
             onChange={(e) => onNameChange(e.target.value)}
+            defaultValue={playListName}
             placeholder="Playlist Name"
           />
           {(playListTracks.length > 0) &&        

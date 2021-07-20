@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import PlayList from '../PlayList/PlayList'
 import SearchResults from '../SearchResults/SearchResults'
-import Spotify, {accessToken} from '../../utils/Spotify';
+import Spotify from '../../utils/Spotify'
+import NavBar from '../NavBar/NavBar'
 
-import { data } from '../../data/data.json'
-
-const Home = () => {
+const Create = () => {
+    const [userData, setUserData] = useState({})
+    
+    useEffect(() => {
+        getUserData()        
+    }, [])
+    const getUserData = () => {
+        // Spotify.getUserId().then((newUserData) => setUserData(newUserData))
+    }
     const [searchResults, setSearchResults] = useState([])
     const [playListName, setPlayListName] = useState("")
     const [playListTracks, setPlayListTracks] = useState([])
-    
-    useEffect(() => {
-        if (!accessToken) {
-            setSearchResults(data)
-        }
-    }, [])
-
     const search = (term) => {
         if (term !== "") {
         Spotify.search(term).then((searchResults) => setSearchResults(searchResults))
@@ -61,20 +61,23 @@ const Home = () => {
         }
     }
     return (
-        <div className="container">
-        <h1 style={{ color: '#fff', textShadow: '2px 2px 2px #ccc' }}>MusicBuddy</h1>
-        <article className="section">
-            <SearchResults search={search} searchResults={searchResults} onAdd={doThese} />
-            <PlayList
-            playListTracks={playListTracks}
-            playListName={playListName}
-            onNameChange={updatePlayListname}
-            onRemove={removeTrack}
-            onSave={savePlayList}
-            />
-        </article>
-        </div>
+        <>
+            <NavBar userData={userData}/>
+            <div className="container">
+                <h1 style={{ color: '#fff', textShadow: '2px 2px 2px #ccc' }}>MusicBuddy</h1>
+                <article className="section">
+                    <SearchResults search={search} searchResults={searchResults} onAdd={doThese} />
+                    <PlayList
+                    playListTracks={playListTracks}
+                    playListName={playListName}
+                    onNameChange={updatePlayListname}
+                    onRemove={removeTrack}
+                    onSave={savePlayList}
+                    />
+                </article>
+            </div>
+        </>
     )
 }
 
-export default Home
+export default Create

@@ -234,4 +234,14 @@ p {
 .trackList h3 {
   margin-top: 1rem;
 }
-
+.dropDown img {
+  width: 40px;
+  height: 40px;
+  background-color: var(--clr-white);
+  border-radius: 50%;
+}
+.dropDown ul{
+  background-color: var(--clr-white);
+  padding: 1rem;
+  position: absolute;
+}
