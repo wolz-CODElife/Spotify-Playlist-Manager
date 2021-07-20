@@ -11,7 +11,7 @@ const NavBar = ({ userData }) => {
                     className="dropDown"
                     onMouseEnter={() => setUserProfile(!userProfile)}
                     onMouseLeave={() => setUserProfile(false)}>
-                    <img src={userImg} alt="user" />
+                    <img src={userData.image || userImg} alt="user" />
                     {userProfile && <ul>
                         <li><h3>{ userData.name || 'John Doe' }</h3></li>
                         <li>
