@@ -21,7 +21,7 @@ const NavBar = ({ userData }) => {
                         </li>
                         <li>
                             <p style={{ margin: '0px' }}>
-                                <a href={userData.url || '/'} target="_blank" rel="noopener noreferrer">Profile >></a>
+                                <a href={userData.url || '/'} target="_blank" rel="noopener noreferrer">{'Profile >>'}</a>
                             </p>
                         </li>
                     </ul>}
