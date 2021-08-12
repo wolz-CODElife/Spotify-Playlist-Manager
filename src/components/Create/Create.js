@@ -11,7 +11,7 @@ const Create = () => {
         getUserData()        
     }, [])
     const getUserData = () => {
-        // Spotify.getUserId().then((newUserData) => setUserData(newUserData))
+        Spotify.getUserId().then((newUserData) => setUserData(newUserData))
     }
     const [searchResults, setSearchResults] = useState([])
     const [playListName, setPlayListName] = useState("")
@@ -51,10 +51,11 @@ const Create = () => {
         e.preventDefault()
         const trackUris = playListTracks.map((track) => track.uri)
         if (playListName !== "") {
-        Spotify.savePlaylist(playListName, trackUris).then(() => {
-            setPlayListName("")
-            setPlayListTracks([])
-        })
+            Spotify.savePlaylist(playListName, trackUris).then(() => {
+                setPlayListName("")
+                setPlayListTracks([])
+                alert('Playlist added successfully...')
+            })
         }
         else {
         document.querySelector('#playListName').focus()

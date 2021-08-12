@@ -16,11 +16,6 @@ const NavBar = ({ userData }) => {
                         <li><h3>{ userData.name || 'John Doe' }</h3></li>
                         <li>
                             <p style={{ margin: '0px' }}>
-                                <a href={`mailto:${userData.email || 'johndoe@gmail.com'}`}>johndoe@gmail.com</a>
-                            </p>
-                        </li>
-                        <li>
-                            <p style={{ margin: '0px' }}>
                                 <a href={userData.url || '/'} target="_blank" rel="noopener noreferrer">{'Profile >>'}</a>
                             </p>
                         </li>
