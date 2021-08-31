@@ -1,6 +1,6 @@
 import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
-import userImg from '../../assets/justin.PNG'
+import userImg from '../assets/justin.PNG'
 
 const NavBar = ({ userData }) => {
     const [userProfile, setUserProfile] = useState(false)
@@ -11,17 +11,20 @@ const NavBar = ({ userData }) => {
                     className="dropDown"
                     onMouseEnter={() => setUserProfile(!userProfile)}
                     onMouseLeave={() => setUserProfile(false)}>
-                    <img src={userData.image || userImg} alt="user" />
+                    <img src={userData?.image || userImg} alt="user" />
                     {userProfile && <ul>
-                        <li><h3>{ userData.name || 'John Doe' }</h3></li>
+                        <li><h3>{ userData?.name || 'John Doe' }</h3></li>
                         <li>
                             <p style={{ margin: '0px' }}>
-                                <a href={userData.url || '/'} target="_blank" rel="noopener noreferrer">{'Profile >>'}</a>
+                                <a href={userData?.url || '/'} target="_blank" rel="noopener noreferrer">{'Profile >>'}</a>
                             </p>
                         </li>
                     </ul>}
                 </div>
-                <Link to="/" className="btn">Home</Link>
+                <div>
+                    <Link to="/" className="btn">Home</Link>
+                    <Link to="/" className="btn" onClick={() => localStorage.clear()}>Logout</Link>
+                </div>
             </div>
         </>
     )

@@ -1,5 +1,5 @@
 import React from "react";
-import TrackList from "../TrackList/TrackList";
+import TrackList from "./TrackList";
 
 const PlayList = ({
   onNameChange,

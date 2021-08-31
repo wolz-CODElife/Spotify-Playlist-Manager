@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import bgImg from '../../assets/justin.PNG'
+import bgImg from '../assets/justin.PNG'
 
 const Track = ({ track, onAdd, onRemove, isRemoval }) => {
     const [trackBg, setTrackBg] = useState('')

@@ -1,6 +1,6 @@
 import React from 'react'
-import SearchBar from '../SearchBar/SearchBar'
-import TrackList from '../TrackList/TrackList'
+import SearchBar from './SearchBar'
+import TrackList from './TrackList'
 
 const SearchResults = ({ search, searchResults, onAdd }) => {
     return (

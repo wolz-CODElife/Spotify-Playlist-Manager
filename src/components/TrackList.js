@@ -1,6 +1,6 @@
 import React from 'react'
-import Track from '../Track/Track'
-import Img from '../../assets/omo.png'
+import Track from './Track'
+import Img from '../assets/omo.png'
 
 const TrackList = ({ tracks, onAdd, isRemoval, onRemove }) => {
     return (

@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import PlayList from '../PlayList/PlayList'
-import SearchResults from '../SearchResults/SearchResults'
-import Spotify from '../../utils/Spotify'
-import NavBar from '../NavBar/NavBar'
+import PlayList from './PlayList'
+import SearchResults from './SearchResults'
+import Spotify from '../utils/Spotify'
+import NavBar from './NavBar'
+import { useHistory } from 'react-router-dom'
 
 const Create = () => {
-    const [userData, setUserData] = useState({})
-    
+    const history = useHistory()
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('user')))
+
     useEffect(() => {
-        getUserData()        
-    }, [])
-    const getUserData = () => {
-        Spotify.getUserId().then((newUserData) => setUserData(newUserData))
-    }
+        if (!localStorage.getItem('user')) {
+            history.push('/')       
+        }
+    }, [userData])
+
+    // const getUserData = () => {
+    //     Spotify.getUserId().then((newUserData) => setUserData(newUserData))
+    // }
     const [searchResults, setSearchResults] = useState([])
     const [playListName, setPlayListName] = useState("")
     const [playListTracks, setPlayListTracks] = useState([])

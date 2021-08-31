@@ -1,6 +1,6 @@
 const clientId = "0917ebef49324a5a9dc234ddce014ca8"
-const redirectUri = encodeURIComponent("https://spotify-wc-playlist-manager.web.app/")
-// const redirectUri = encodeURIComponent("http://localhost:3000/")
+// const redirectUri = encodeURIComponent("https://spotify-wc-playlist-manager.web.app/")
+const redirectUri = encodeURIComponent("http://localhost:3000/")
 const scopes = encodeURIComponent("user-read-private user-read-email playlist-modify-public")
 
 let accessToken
@@ -17,7 +17,7 @@ const Spotify = {
             accessToken = accessTokenMatch[1]
             const expiresIn = Number(expiresInMatch[1])
             window.setTimeout(() => (accessToken = ""), expiresIn * 1000)
-            window.history.pushState("Access Token", null,'/')
+            window.history.pushState("Access Token", null,'/create')
             return accessToken
         }else{
             const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes}&response_type=token`
@@ -32,13 +32,14 @@ const Spotify = {
         .then(jsonResponse => {            
             if (jsonResponse) {
                 const { id, display_name, email, external_urls, images } = jsonResponse
-                return {
+                const profile = {
                     user_id: id,
                     email: email,
                     name: display_name,
                     image: images[0].url,
                     url: external_urls.spotify
                 }
+                return profile
             }
         })
     },
