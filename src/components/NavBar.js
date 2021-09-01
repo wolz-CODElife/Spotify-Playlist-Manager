@@ -23,6 +23,7 @@ const NavBar = ({ userData }) => {
                 </div>
                 <div>
                     <Link to="/" className="btn">Home</Link>
+                    <Link to="/mycollections" className="btn">Collections</Link>
                     <Link to="/" className="btn" onClick={() => localStorage.clear()}>Logout</Link>
                 </div>
             </div>

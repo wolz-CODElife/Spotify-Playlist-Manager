@@ -21,7 +21,7 @@ const PlayList = ({
           />
           {(playListTracks.length > 0) &&        
             <button className="btn" onClick={onSave}>
-              Save to Spotify
+              Save to Collections
             </button>
           }
         </form>

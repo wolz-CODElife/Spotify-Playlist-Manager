@@ -4,26 +4,25 @@ import SearchResults from './SearchResults'
 import Spotify from '../utils/Spotify'
 import NavBar from './NavBar'
 import { useHistory } from 'react-router-dom'
+import { savePlaylist } from '../utils/model'
 
 const Create = () => {
     const history = useHistory()
-    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('user')))
+    const [userData, setUserData] = useState()
 
     useEffect(() => {
         if (!localStorage.getItem('user')) {
             history.push('/')       
         }
-    }, [userData])
+        setUserData(localStorage.getItem('user'))
+    }, [history])
 
-    // const getUserData = () => {
-    //     Spotify.getUserId().then((newUserData) => setUserData(newUserData))
-    // }
     const [searchResults, setSearchResults] = useState([])
     const [playListName, setPlayListName] = useState("")
     const [playListTracks, setPlayListTracks] = useState([])
     const search = (term) => {
         if (term !== "") {
-        Spotify.search(term).then((searchResults) => setSearchResults(searchResults))
+            Spotify.search(term).then((searchResults) => setSearchResults(searchResults))
         }
         else {
         document.querySelector("#searchBar").focus()
@@ -54,12 +53,15 @@ const Create = () => {
     }
     const savePlayList = (e) => {
         e.preventDefault()
-        const trackUris = playListTracks.map((track) => track.uri)
+        // const trackUris = playListTracks.map((track) => track.uri)
         if (playListName !== "") {
-            Spotify.savePlaylist(playListName, trackUris).then(() => {
-                setPlayListName("")
-                setPlayListTracks([])
-                alert('Playlist added successfully...')
+            alert('Playlist added successfully...')
+            savePlaylist(userData.user_id, playListName, playListTracks)
+            .then(req => {
+                if (req) {
+                    setPlayListName("")
+                    setPlayListTracks([])
+                }
             })
         }
         else {

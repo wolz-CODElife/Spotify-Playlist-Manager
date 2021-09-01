@@ -39,3 +39,36 @@ export const getUser = async (user_id) => {
         return
     }
 }
+
+
+export const savePlaylist = async (user_id, name, tracks) => {
+    if(!name || !tracks.length){
+        return 
+    }
+    try {
+        const playlists = await client.query(
+            q.Create(
+                q.Collection('playlists'),
+                {
+                    data: {user_id, name, tracks}
+                }
+            )
+        )
+        return playlists.data
+    } catch (error) {
+        return
+    }
+}
+
+export const getPlaylists = async (user_id) => {
+    try {
+        const playlists = await client.query(
+            q.Get(
+              q.Match(q.Index('playlist_for_user'), user_id)
+            )
+        )
+        return playlists.data
+    } catch (error) {
+        return
+    }
+}
