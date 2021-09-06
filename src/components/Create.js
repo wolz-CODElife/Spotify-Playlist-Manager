@@ -8,13 +8,13 @@ import { savePlaylist } from '../utils/model'
 
 const Create = () => {
     const history = useHistory()
-    const [userData, setUserData] = useState()
+    const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("user")))
 
     useEffect(() => {
         if (!localStorage.getItem('user')) {
             history.push('/')       
         }
-        setUserData(localStorage.getItem('user'))
+        setUserData(JSON.parse(localStorage.getItem("user")))
     }, [history])
 
     const [searchResults, setSearchResults] = useState([])

@@ -4,8 +4,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 const client = new faunadb.Client({ secret: "fnAEOiNRmlACC2g3K9YLdtRCRIzt7Je5Sy3EqaES" })
 
-
-
 export const createUser = async ({user_id, email, name, image, url}) => {
     try {
         const user = await client.query(
@@ -23,8 +21,6 @@ export const createUser = async ({user_id, email, name, image, url}) => {
     }
 }
 
-
-
 export const getUser = async (user_id) => {
     try {
         const user = await client.query(
@@ -39,7 +35,6 @@ export const getUser = async (user_id) => {
         return
     }
 }
-
 
 export const savePlaylist = async (user_id, name, tracks) => {
     if(!name || !tracks.length){
@@ -61,14 +56,46 @@ export const savePlaylist = async (user_id, name, tracks) => {
 }
 
 export const getPlaylists = async (user_id) => {
+    let playlistList = []
     try {
         const playlists = await client.query(
-            q.Get(
+            q.Paginate(
               q.Match(q.Index('playlist_for_user'), user_id)
             )
         )
-        return playlists.data
+        for (let playlistID of playlists.data) {
+            let playlist = await getPlaylist(playlistID.value.id)
+            playlistList.push(playlist)
+        }
+        return playlistList
     } catch (error) {
         return
     }
 }
+
+export const getPlaylist = async (id) => {
+    try {
+        
+        const playlist = await client.query(
+            q.Get(q.Ref(q.Collection('playlists'), id))
+        )
+        playlist.data.id = playlist.ref.value.id
+        return playlist.data
+    } catch (error) {
+        return
+    }
+}
+  
+export const deletePlaylist = async (id) => {
+    try {   
+        const playlist = await client.query(
+            q.Delete(
+                q.Ref(q.Collection('playlists'), id)
+            )
+        )
+        playlist.data.id = playlist.ref.value.id
+        return playlist.data
+    } catch (error) {
+        return
+    }
+  }

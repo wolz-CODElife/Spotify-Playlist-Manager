@@ -9,13 +9,7 @@ const TrackList = ({ tracks, onAdd, isRemoval, onRemove }) => {
                 <div className="playList">
                     {tracks.map((track) => {
                         return (
-                            <Track
-                                key={track.id}
-                                track={track}
-                                onAdd={onAdd}
-                                isRemoval={isRemoval}
-                                onRemove={onRemove}
-                            />
+                            <Track key={track.id} track={track} onAdd={onAdd} isRemoval={isRemoval} onRemove={onRemove} />
                         )
                     })}
                 </div >

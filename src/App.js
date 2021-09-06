@@ -5,9 +5,6 @@ import Create from './components/Create';
 import Error from './components/Error'
 import MyCollections from './components/MyCollections';
 
-
-
-
 const App = () => {
   return (
     <Router>
@@ -15,7 +12,7 @@ const App = () => {
         <Route exact path="/" children={<Index />} />
         <Route path="/create" children={<Create />} /> 
         <Route path="/mycollections" children={<MyCollections /> } /> 
-        <Route path="*"><Error /> </Route>       
+        <Route path="*" children={Error} />
       </Switch>
     </Router>
   )

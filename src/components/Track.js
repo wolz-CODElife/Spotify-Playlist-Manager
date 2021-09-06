@@ -5,19 +5,11 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
     const [trackBg, setTrackBg] = useState('')
 
     useEffect(() => {
-        if (track.image) {
-            setTrackBg(track.image)
-        }
-        else {
-            setTrackBg(bgImg)
-        }
+        track.image? setTrackBg(track.image) : setTrackBg(bgImg)
     }, [track.image])
-    const addTrack = () => {
-        onAdd(track)
-    }
-    const removeTrack = () => {
-        onRemove(track)
-    }
+    const addTrack = () => onAdd(track)
+    const removeTrack = () => onRemove(track)
+
     return (
         <ul className="track">
             <li>
@@ -27,20 +19,17 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
                             <h3>{track.name}</h3>
                             {track.artist} | {track.album}
                         </div>
-                        <TrackAction isRemoval={isRemoval} removeTrack={removeTrack} addTrack={addTrack} />
+                        {
+                            onAdd || onRemove ?
+                                <TrackAction isRemoval={isRemoval} removeTrack={removeTrack} addTrack={addTrack} />
+                            :
+                                ""
+                        }
                     </div>
                 </div>
             </li>
             <li>
-                <iframe 
-                    src={"https://open.spotify.com/embed/track/" + track.id}
-                    width="100%" 
-                    height="80"
-                    frameBorder="0"
-                    allowtransparency="True"
-                    allow="encrypted-media"
-                    title="preview"
-                />
+                <iframe src={"https://open.spotify.com/embed/track/" + track.id} width="100%" height="80" frameBorder="0" allowtransparency="True" allow="encrypted-media" title="preview" />
             </li>
         </ul>
     )
@@ -57,9 +46,5 @@ const TrackAction = ({ isRemoval, removeTrack, addTrack }) => {
         </>
     )
 }
-
-
-
-
 
 export default Track

@@ -11,6 +11,7 @@ const SearchResults = ({ search, searchResults, onAdd }) => {
         </>
     )
 }
+
 const SearchBar = ({ onSearch }) => {
     const [term, setTerm] = useState("");
 
