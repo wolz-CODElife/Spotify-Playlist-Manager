@@ -2,7 +2,7 @@ import faunadb, { query as q } from 'faunadb'
 import dotenv from 'dotenv'
 
 dotenv.config()
-const client = new faunadb.Client({ secret: "fnAEOiNRmlACC2g3K9YLdtRCRIzt7Je5Sy3EqaES" })
+const client = new faunadb.Client({ secret: "YOUR-FAUNA-SECRET-KEY" })
 
 export const createUser = async ({user_id, email, name, image, url}) => {
     try {
