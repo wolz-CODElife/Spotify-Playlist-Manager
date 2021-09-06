@@ -21,8 +21,9 @@ const MyCollections = () => {
         return setPlaylists(req)
     })
     .catch((err) => console.log(err.message))
-    
-    setUserData(JSON.parse(localStorage.getItem("user")))
+    if (!userData) {
+        setUserData(JSON.parse(localStorage.getItem("user")))
+    }
   }, [userData, history]);
     
     const togglePlaylist = (id) => {
@@ -53,14 +54,14 @@ const MyCollections = () => {
         <article className="section">            
             <div className="trackList">
                 <div className="playList">
-                    {playlists.length ?
+                    {playlists?.length ?
                         playlists?.map((playlist) => { return (
-                            <ul className="track" key={playlist.id}>
+                            <ul className="track" key={playlist?.id}>
                                 <li style={{ cursor: 'pointer' }} onClick={() => togglePlaylist(playlist.id)}>
                                     <div style={{ margin: '0px', width: '100%', backgroundImage: `url(${bgImg})`, backgroundPosition: 'center', backgroundSize: 'cover', borderRadius: '0.3rem' }}>
                                         <div className="item" style={{backgroundColor: 'rgba(255, 255, 255, 0.8)', margin: '0px'}}>                        
                                             <div>
-                                                <h3>{playlist.name}</h3>
+                                                <h3>{playlist?.name}</h3>
                                             </div>
                                             <button className="btn" style={{ background: 'red' }} onClick={(e) => {
                                                 e.preventDefault()
@@ -69,9 +70,9 @@ const MyCollections = () => {
                                         </div>
                                     </div>
                                 </li>
-                                {activePlaylist === playlist.id &&
+                                {activePlaylist === playlist?.id &&
                                     <div style={{background: '#000000'}}>
-                                        {playlist.tracks.map((track) => {
+                                        {playlist?.tracks.map((track) => {
                                             return (
                                                 <Track
                                                     key={track.id}

@@ -7,8 +7,8 @@ const Track = ({ track, onAdd, onRemove, isRemoval }) => {
     useEffect(() => {
         track.image? setTrackBg(track.image) : setTrackBg(bgImg)
     }, [track.image])
-    const addTrack = () => onAdd(track)
-    const removeTrack = () => onRemove(track)
+    const addTrack = () => {onAdd(track)}
+    const removeTrack = () => {onRemove(track)}
 
     return (
         <ul className="track">
