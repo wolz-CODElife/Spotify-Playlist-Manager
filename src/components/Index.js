@@ -25,7 +25,7 @@ const Index = () => {
     
     const Login = () => {
         Spotify.getUserId().then((newUserData) => {
-            getUser(newUserData.user_id)
+            getUser(newUserData)
             .then(req => {
                 if (req)
                     history.push('/create')

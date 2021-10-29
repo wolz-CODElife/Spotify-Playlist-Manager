@@ -1,5 +1,5 @@
-const clientId = "YOUR-SPOTIFY-CLIENT-ID"
-const redirectUri = encodeURIComponent("http://localhost:3000/")
+const clientId = "0917ebef49324a5a9dc234ddce014ca8"
+const redirectUri = encodeURIComponent("https://spotify-wc-playlist-manager.web.app/")
 const scopes = encodeURIComponent("user-read-private user-read-email playlist-modify-public")
 
 let accessToken

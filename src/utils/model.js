@@ -2,7 +2,7 @@ import faunadb, { query as q } from 'faunadb'
 import dotenv from 'dotenv'
 
 dotenv.config()
-const client = new faunadb.Client({ secret: "YOUR-FAUNA-SECRET-KEY" })
+const client = new faunadb.Client({ secret: "fnAEWqZV80ACS6k6bEGq2Az54eqSDU-3HCZdLRhy" })
 
 export const createUser = async ({user_id, email, name, image, url}) => {
     try {
@@ -10,7 +10,7 @@ export const createUser = async ({user_id, email, name, image, url}) => {
             q.Create(
                 q.Collection('users'),
                 {
-                    data: {user_id, email, name, image, url}
+                    data: {user_id, email, name, image:"https://i.postimg.cc/cHDFCk14/image.png", url}
                 }
             )
         )
@@ -21,7 +21,7 @@ export const createUser = async ({user_id, email, name, image, url}) => {
     }
 }
 
-export const getUser = async (user_id) => {
+export const getUser = async ({user_id}) => {
     try {
         const user = await client.query(
             q.Get(
